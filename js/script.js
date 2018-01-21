@@ -60,6 +60,7 @@ function setSpots(teams){
   for(var i=0; i<8; i++){
     toggle(teams[i], `spot${i+1}`)
   }
+  play.disabled = false
 }
 
 function returnToOriginal(){
@@ -84,6 +85,7 @@ function returnToOriginal(){
 }
 
 function gameOver(){
+  play.disabled = true
   playing.forEach(function(p){
     toggle(p, "hide")
   })
