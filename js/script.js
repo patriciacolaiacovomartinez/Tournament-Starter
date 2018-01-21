@@ -1,5 +1,6 @@
 //select Elements
-var teams = document.querySelectorAll(".team")
+var teamContainer = document.querySelector(".container")
+var teams = setTeams(getTeamsArray())
 var spot1 = document.querySelector(".opp1")
 var spot2 = document.querySelector(".opp2")
 var play = document.querySelector(".play")
@@ -14,61 +15,90 @@ var place = "player1"
 var currentPlayers = []
 var x = 0;
 var winner
-
-var rounds = {
-  round1: [
-    {player1: teams[0], player2: teams[1], spot: "spot9"},
-    {player1: teams[2], player2: teams[3], spot: "spot10"},
-    {player1: teams[4], player2: teams[5], spot: "spot11"},
-    {player1: teams[6], player2: teams[7], spot: "spot12"}
-  ],
-  round2:[
-    {player1: "", player2: "", spot: "spot13"},
-    {player1: "", player2: "", spot: "spot14"}
-  ],
-  round3:[
-    {player1: "", player2: "", spot: "spot15"}
-  ],
-  round4:[
-    {player1: ""}
-  ]
-}
+var rounds = createRounds(teams)
 
 //function definitions
+function toggle(elem, tog){
+  elem.classList.toggle(tog)
+}
+
+function setTeams(teamsArray){
+  teamContainer.innerHTML = ""
+  var holder = teamsArray
+  var temp = []
+  var length = teamsArray.length-1
+  for(var i=length; i>(length-8); i--){
+    var random = Math.floor(Math.random()*(i+1))
+    teamContainer.innerHTML += teamsArray[random]
+    temp.push(teamsArray.splice(random, 1))
+  }
+  return document.querySelectorAll('.team')
+}
+
+function createRounds(teams){
+  return {
+    round1: [
+      {player1: teams[0], player2: teams[1], spot: "spot9"},
+      {player1: teams[2], player2: teams[3], spot: "spot10"},
+      {player1: teams[4], player2: teams[5], spot: "spot11"},
+      {player1: teams[6], player2: teams[7], spot: "spot12"}
+    ],
+    round2:[
+      {player1: "", player2: "", spot: "spot13"},
+      {player1: "", player2: "", spot: "spot14"}
+    ],
+    round3:[
+      {player1: "", player2: "", spot: "spot15"}
+    ],
+    round4:[
+      {player1: ""}
+    ]
+  }
+}
+
+function setSpots(teams){
+  for(var i=0; i<8; i++){
+    toggle(teams[i], `spot${i+1}`)
+  }
+}
+
 function returnToOriginal(){
   setTimeout(function(){
     win.classList.toggle("hide")
     vs.classList.toggle("hide")
     spot1.textContent = ""
     spot2.textContent = ""
-    teams.forEach(function(team, i){
-      team.classList = `team spot${i+1}`
-    })
     round = 1
     match = 0
     place = "player1"
     currentPlayers = []
     x = 0;
+    teams =setTeams(getTeamsArray())
+    rounds = createRounds(teams)
+    setSpots(teams)
     setPlayers()
     playing.forEach(function(p){
-      p.classList.toggle("hide")
+      toggle(p, "hide")
     })
   }, 3000)
 }
+
 function gameOver(){
   playing.forEach(function(p){
-    p.classList.toggle("hide")
+    toggle(p, "hide")
   })
-  vs.classList.toggle("hide")
-  win.classList.toggle("hide")
+  toggle(vs, "hide")
+  toggle(win, "hide")
   returnToOriginal()
 }
+
 function setPlayers(){
   currentPlayers = [rounds[`round${round}`][match].player1, rounds[`round${round}`][match].player2 ]
   playing.forEach(function(p, i){
     p.textContent = currentPlayers[i].dataset.name
   })
 }
+
 function changePlayer(){
   if(place === "player1"){
     place = "player2"
@@ -87,7 +117,6 @@ function nextMatch(){
 }
 
 function changeMatch(){
-  console.log(match, x)
   if(round == 3){
     gameOver()
     return 
@@ -100,6 +129,12 @@ function changeMatch(){
   match++
   changePlayer()
   return
+}
+
+function moveTeam(winner, spot){
+  var oldSpot = winner.classList[1]
+  toggle(winner, oldSpot)
+  toggle(winner, spot)
 }
 
 function playGame(round, match, place){
@@ -120,12 +155,6 @@ function playGame(round, match, place){
   return rounds[`round${round+1}`][x][place]
 }
 
-function moveTeam(winner, spot){
-  var oldSpot = winner.classList[1]
-  winner.classList.toggle(oldSpot)
-  winner.classList.toggle(spot)
-}
-
 //Event Listeners
 play.addEventListener("click", function(e){
   winner = playGame(round, match, place)
@@ -133,4 +162,5 @@ play.addEventListener("click", function(e){
   changeMatch()
 })
 
+setSpots(teams)
 setPlayers()
