@@ -3,6 +3,7 @@ body{
   background: #ffffff url("../img/uefa.jpg ") no-repeat center center fixed;
   background-size: cover; font-family: 'Oswald', sans-serif;
 }
+
 .round{
   position: absolute; display: inline-block; font-size: 4vh; color: white;
 }
