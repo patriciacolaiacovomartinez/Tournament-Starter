@@ -1,7 +1,9 @@
 //select Elements from here, I kept the teams array because that can be confusing
+var teamContainer = document.querySelector(".container")
 var teams = setTeams(getTeamsArray())
 var play = document.querySelector(".play")
 var playing = document.querySelectorAll(".playing")
+
 
 //game states
 var round = 1
@@ -20,11 +22,15 @@ function toggle(elem, tog){
 //This function puts the teams in the container div innerHTML 
 function setTeams(teamsArray){
   //Reset the containers InnerHTML so that all the teams are gone
+  teamContainer.innerHTML = ""
   //Create a temp array so that it holds the removed elements from the holder array
+  var temp = []
   var length = teamsArray.length-1
   for(var i=length; i>(length-8); i--){
     var random = Math.floor(Math.random()*(i+1))
     //Add the element to the teamContainer using InnerHTML and select the element by using the random number to grab from the teamsArray. Once you are done push the selected element into the temp array and remove the element from the teamsArray by using the function splice
+    teamContainerinnerHTML += teamsArray[random]
+    temp.push(teamsArray.splice(random, 1)) 
   }
   return document.querySelectorAll('.team')
 }
