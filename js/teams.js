@@ -16,7 +16,7 @@ function getTeamsArray(){
     `<div class="team" id="team14" data-name="Tottenham" style="background: url('http://tallyconnection.com/wp-content/uploads/2015/10/Tottenham-495x1024.png') 50% 50% no-repeat; background-size: 4vw;"></div>`,
     `<div class="team" id="team15" data-name="Spartak Moscow" style="background: url('https://upload.wikimedia.org/wikipedia/en/2/22/FC_Spartak_Moscow_logo.png') 50% 50% no-repeat; background-size: 13vw;"></div>`,
     `<div class="team" id="team16" data-name="Leipzig" style="background: url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/350px-RB_Leipzig_2014_logo.svg.png') 50% 50% no-repeat; background-size: 13vw;"></div>`,
-    `<div class="team" id="team17" data-name="Borussia Dortmund" style="background: url('https://logofootball.files.wordpress.com/2016/10/borussia-dortmund-logo-png.png?w=300') 50% 50% no-repeat; background-size: 10vw;"></div>`,
+    `<div class="team" id="team17" data-name="Borussia Dortmund" style="background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/1200px-Borussia_Dortmund_logo.svg.png') 50% 50% no-repeat; background-size: 10vw;"></div>`,
     `<div class="team" id="team18" data-name="Apoel Nicosia" style="background: url('https://b.fssta.com/uploads/content/dam/fsdigital/fscom/global/dev/static_resources/soccer/teams/ucl/7566.vresize.200.200.medium.0.png') 50% 50% no-repeat; background-size: 15vw;"></div>`
   ]
 }
